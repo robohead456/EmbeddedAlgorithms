@@ -1,7 +1,12 @@
+/* 
+ * Main Algorithm Test Code
+ * 
+ * Written by Michael Sidler
+ * 
+ */
+
 #include <Arduino.h>
-
 #include "boardsetup.h"
-
 #include "binaryArraySearch.h"
 
 void setup() {
@@ -23,80 +28,8 @@ void setup() {
   SerialPC.println( "bits");
   SerialPC.println("\r\n");
   
-  // Variables
-  uint32_t startTime = 0;
-  uint32_t endTime = 0;
-  uint32_t sumTime = 0;
-  uint32_t numIterations = 65536;
-
-  ////   Main Test
-  //      Runs many tests with each variation of the algorithm
-  //      Average and record test times
-
-  SerialPC.print("BinArrSrt (=<>): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_elg(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
-
-  sumTime = 0;
-  SerialPC.print("BinArrSrt (=><): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_egl(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
-
-  sumTime = 0;
-  SerialPC.print("BinArrSrt (>=<): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_gel(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
-
-  sumTime = 0;
-  SerialPC.print("BinArrSrt (><=): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_gle(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
-
-  sumTime = 0;
-  SerialPC.print("BinArrSrt (<>=): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_lge(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
-
-  sumTime = 0;
-  SerialPC.print("BinArrSrt (<=>): ");
-  for(uint32_t i = 0; i < numIterations; i++) {
-    startTime = micros();
-    binaryArrSearch_leg(values, numValues, (uint32_t)4095);
-    endTime = micros();
-    sumTime += endTime-startTime;
-  }
-  SerialPC.print(sumTime/(float)numIterations);
-  SerialPC.println(" us");
+  // Run Individual Tests
+  binaryArrSearchTester();
 
 }
 
@@ -106,3 +39,4 @@ void loop() {
   digitalWrite(LED_BUILTIN,LOW);
   delay(1000);
 }
+

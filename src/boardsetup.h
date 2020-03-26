@@ -1,3 +1,16 @@
+/* 
+ * Board Setup File
+ * 
+ * Written by Michael Sidler
+ * 
+ * Uses build flags set in the platformio.ini file to change parameters in the code
+ * 
+ * SerialPC     = the serial port used to send data to the host computer
+ * BOARDINFO    = A string to print with the details of the microcontroller
+ * SERIALDELAY  = Delay after starting the serial port to allow the computer to connect
+ * 
+ */
+
 #ifdef MEGA2560
   #define SerialPC Serial
   #define BOARDINFO "Arduino Mega (ATMega2560)"
